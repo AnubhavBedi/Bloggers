@@ -18,10 +18,10 @@ import com.Backend.ApplyJob;
 import com.Backend.Blog;
 import com.Backend.BlogComment;
 import com.Backend.Forum;
+import com.Backend.Friend;
 import com.Backend.Job;
+import com.Backend.ProfilePicture;
 import com.Backend.User;
-import com.Backend.Dao.UserDao;
-import com.Backend.DaoImpl.UserDaoImpl;
 
 
 @Configuration
@@ -59,6 +59,8 @@ public class DBconfg {
 		factory.addAnnotatedClass(Job.class);
 		factory.addAnnotatedClass(ApplyJob.class);
 		factory.addAnnotatedClass(Forum.class);
+		factory.addAnnotatedClass(ProfilePicture.class);
+		factory.addAnnotatedClass(Friend.class);
 		System.out.println("SessionFactory created");
 		return factory.buildSessionFactory();
 	}

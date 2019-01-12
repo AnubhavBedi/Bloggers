@@ -109,11 +109,17 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Override
-	public List<Blog> listBlogs(String email) {
+	public List<Blog> listBlogs(String email,String role) {
 		try{
 			Session session=sessionfactory.getCurrentSession();
-			Query querry=session.createQuery("from Blog where email=:abc");
+			Query querry=null;
+			if(role.equals("Role_User")){
+			querry=session.createQuery("from Blog where email=:abc");
 			querry.setParameter("abc",email);
+			}
+			else {
+			querry=session.createQuery("from Blog");	
+			}
 			List<Blog> blogList=querry.list();
 			return blogList;
 		}

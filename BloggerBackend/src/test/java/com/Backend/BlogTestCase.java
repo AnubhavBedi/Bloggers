@@ -188,7 +188,7 @@ public class BlogTestCase {
 		@Ignore
 		public void listBlog ()
 		{
-			List<Blog> blogList=blogdao.listBlogs("Blogtest1@gmail.com");
+			List<Blog> blogList=blogdao.listBlogs("Blogtest1@gmail.com","Role_User");
 			for(Blog blog:blogList){
 				System.out.println(blog.getBlogName()+" "+blog.getBlogContext());
 			}
