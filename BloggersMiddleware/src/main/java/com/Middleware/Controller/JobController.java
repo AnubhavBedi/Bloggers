@@ -78,7 +78,7 @@ public class JobController {
 	@GetMapping(value="/listJobs")
 	public ResponseEntity<List<Job>> getListBlogs(HttpSession session){
 		List<Job> listJobs=null;
-		//User user=(User)session.getAttribute("userObj");
+		User user=(User)session.getAttribute("userObj");
 		
 			listJobs=jobDao.listAlljobs();
 			if(listJobs.size()>0){

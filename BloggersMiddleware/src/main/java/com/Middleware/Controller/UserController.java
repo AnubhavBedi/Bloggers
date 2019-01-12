@@ -1,9 +1,7 @@
 package com.Middleware.Controller;
 
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -113,15 +111,30 @@ public class UserController {
 		}
 	}
 	
+	@GetMapping(value="getUserData")
+	public ResponseEntity<?> getUser(HttpSession session){
+		User user=(User)session.getAttribute("userObj");
+		return new ResponseEntity<User>(user,HttpStatus.OK);
+	}
+
+	
 	@PostMapping("/updateUser")
-	public ResponseEntity<String> updateUser(@RequestBody User user){
+	public ResponseEntity<?> updateUser(@RequestBody User user){
 		
 		if(userdao.updateUser(user)){
-			return new ResponseEntity<String>("User updated succesfully...",HttpStatus.OK);
+			return new ResponseEntity<User>(user,HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<String>("Problem in updating User...",HttpStatus.NOT_FOUND);
+			Error errorObj=new Error("Problem in Updating User");
+			return new ResponseEntity<Error>(errorObj,HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	
+	
+
+	
+	
+
 
 }	

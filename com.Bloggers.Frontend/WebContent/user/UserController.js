@@ -6,7 +6,7 @@ $scope.user={email:'',password:'',firstName:'',lastName:'',contactNumber:'',role
 	$scope.registerUser=function(){
 	$http.post("http://localhost:7838/BloggersMiddleware/register",$scope.user).
 	then(function(response){
-				alert("User Registered Succesfully");
+				alert(" Error in Registered Succesfully");
 			},
 			function(response){
 				alert("User Registered Succesfully");
@@ -35,5 +35,35 @@ $scope.user={email:'',password:'',firstName:'',lastName:'',contactNumber:'',role
 		
 		
 	};
+	
+	$rootScope.logout=function(){
+		console.log('LogOut function');
+		delete $rootScope.currentUser;
+		$cookieStore.remove('userDetails');
+		$location.path("logout");
 		
+	}
+	$scope.fetchUser=function(){
+		console.log('fetching User');
+		$http.get("http://localhost:7838/BloggersMiddleware/getUserData").
+		then(function(response){
+					$scope.user=response.data;
+					$rootScope.currentUser=response.data;
+					$cookieStore.put('userDetails',response.data);
+					
+		});
+	};
+	
+	$scope.updateUser=function(){
+	$http.post("http://localhost:7838/BloggersMiddleware/updateUser",$scope.user).
+		then(function(response){
+					alert("User Updated Succesfully");
+					$location.path("/viewProfile");
+				},
+				function(error){
+					alert("Error in Updating user"+error);
+					console.log(error);
+				})
+		
+	};
 });
